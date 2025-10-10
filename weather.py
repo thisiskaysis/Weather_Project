@@ -48,8 +48,10 @@ def calculate_mean(weather_data):
     Returns:
         A float representing the mean value.
     """
-    pass
-
+    weather_data = [float(data) for data in weather_data]
+    total = sum(weather_data)
+    length = len(weather_data)
+    return total/length
 
 def load_data_from_csv(csv_file):
     """Reads a csv file and stores the data in a list.
