@@ -61,13 +61,15 @@ def load_data_from_csv(csv_file):
     Returns:
         A list of lists, where each sublist is a (non-empty) line in the csv file.
     """
-    with open(csv_file, 'r') as csv_data:
+    
+    data = []
+    
+    with open(csv_file, 'r', newline='') as csv_data:
         reader = csv.reader(csv_data)
-        data = []
         for row in reader:
             data.append(row)
     return data
-    # NOT WORKING - NEED TO FIX - THINK ABOUT DATETIME CONVERSION
+    # NOT WORKING
 
 def find_min(weather_data):
     """Calculates the minimum value in a list of numbers.
@@ -77,7 +79,22 @@ def find_min(weather_data):
     Returns:
         The minimum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
-    pass
+    
+    if not weather_data:
+        return ()
+    
+    min_value = min(weather_data)
+    last_index = 0
+
+    for index, number in enumerate(weather_data):
+        if number > min_value:
+            continue
+        if number == min_value:
+            last_index = index
+    
+    float_value = float(min_value)
+    return float_value, last_index
+
 
 
 def find_max(weather_data):
