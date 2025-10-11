@@ -24,7 +24,11 @@ def convert_date(iso_string):
     Returns:
         A date formatted like: Weekday Date Month Year e.g. Tuesday 06 July 2021
     """
-    pass
+    # date = datetime.strftime(iso_string, "%A %d %m %Y")
+    
+    iso_date = datetime.fromisoformat(iso_string)
+    formatted_date = datetime.strftime(iso_date, "%A %d %B %Y")
+    return formatted_date
 
 
 def convert_f_to_c(temp_in_fahrenheit):
