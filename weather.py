@@ -142,7 +142,19 @@ def generate_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    pass
+    # length_day = len(weather_data)
+    # max_temp = find_max(weather_data[2])
+    # min_temp = find_min(weather_data[1])
+    # max_temp_date = convert_date(max_temp)
+    # min_temp_date = convert_date(min_temp)
+    # avg_low = calculate_mean(weather_data[1])
+    # avg_high = calculate_mean(weather_data[2])
+
+    for data in weather_data:
+        if isinstance(data, int):
+            format_temperature(data)
+            continue
+
 
 
 def generate_daily_summary(weather_data):
@@ -153,4 +165,17 @@ def generate_daily_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    pass
+    
+    for data in weather_data:
+        date = convert_date(data[0])
+        min_degrees = convert_f_to_c(data[1])
+        max_degrees = convert_f_to_c(data[2])
+        min_temp = format_temperature(min_degrees)
+        max_temp = format_temperature(max_degrees)
+        print(f"""---- {date} ----
+  Minimum Temperature: {min_temp}
+  Maximum Temperature: {max_temp}
+
+        """)
+
+        # DO I NEED TO APPEND ALL TO NEW DICTIONARY AND PRINT FROM THERE?
