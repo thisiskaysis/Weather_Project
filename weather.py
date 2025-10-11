@@ -68,11 +68,20 @@ def load_data_from_csv(csv_file):
     
     data = []
     
-    with open(csv_file, 'r', newline='') as csv_data:
-        reader = csv.reader(csv_data)
+    with open(csv_file, 'r') as file:
+        reader = csv.reader(file)
+        next(reader)
         for row in reader:
-            data.append(row)
+            if row and len(row) == 3:
+                date = row[0]
+                min = int(row[1])
+                max = int(row[2])
+                output = [date, min, max]
+                data.append(output)
+    
     return data
+
+    
     # NOT WORKING
 
 def find_min(weather_data):
