@@ -81,8 +81,6 @@ def load_data_from_csv(csv_file):
     
     return data
 
-    
-    # NOT WORKING
 
 def find_min(weather_data):
     """Calculates the minimum value in a list of numbers.
@@ -142,37 +140,47 @@ def generate_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    # length_day = len(weather_data)
-    # max_temp = find_max(weather_data[2])
-    # min_temp = find_min(weather_data[1])
-    # max_temp_date = convert_date(max_temp)
-    # min_temp_date = convert_date(min_temp)
-    # avg_low = calculate_mean(weather_data[1])
-    # avg_high = calculate_mean(weather_data[2])
-    
+    min_list = []
+    max_list = []
     date = len(weather_data)
 
     for data in weather_data:
-        if int in data:
-            convert_f_to_c(data)
-            format_temperature(data)    
-        min_temp = find_min(data[1])
-        max_temp = find_max(data[2])
-        avg_low = calculate_mean(data[1])
-        avg_high = calculate_mean(data[2])
-        for index in min_temp:
-            low_date = index[0]
-            min_temp_date = convert_date(low_date)
-        for index in max_temp:
-            high_date = index[0]
-            max_temp_date = convert_date(high_date)
-        print(f"""{date} Day Overview
-The lowest temperature will be {min_temp}, and will occur on {min_temp_date}.
-The highest temperature will be {max_temp}, and will occur on {max_temp_date}.
-The average low this week is {avg_low}.
-The average high this week is {avg_high}.
-              """)
+        if data and len(data) == 3:
+            min_list.append(data[1]) 
+            max_list.append(data[2]) 
 
+    mean_low = calculate_mean(min_list)
+    mean_low_celcius = convert_f_to_c(mean_low)
+    avg_low = format_temperature(mean_low_celcius)
+    mean_high = calculate_mean(max_list)
+    mean_high_celcius = convert_f_to_c(mean_high)
+    avg_high = format_temperature(mean_high_celcius)
+
+    min = find_min(min_list)
+    min_list.extend(min)
+    min_index = min_list[-1]
+    min_farenheit = min_list[-2]
+    min_celcius = convert_f_to_c(min_farenheit)
+    min_temp = format_temperature(min_celcius)
+
+    max = find_max(max_list)
+    max_list.extend(max)
+    max_index = max_list[-1]
+    max_farenheit = max_list[-2]
+    max_celcius = convert_f_to_c(max_farenheit)
+    max_temp = format_temperature(max_celcius)
+
+    min_data = weather_data[min_index][0]
+    min_date = convert_date(min_data)
+    max_data = weather_data[max_index][0]
+    max_date = convert_date(max_data)
+
+    return f"""{date} Day Overview
+  The lowest temperature will be {min_temp}, and will occur on {min_date}.
+  The highest temperature will be {max_temp}, and will occur on {max_date}.
+  The average low this week is {avg_low}.
+  The average high this week is {avg_high}.
+"""
 
 
 def generate_daily_summary(weather_data):
