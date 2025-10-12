@@ -191,17 +191,18 @@ def generate_daily_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    
+
+    daily_summary = ""
+
     for data in weather_data:
-        date = convert_date(data[0])
-        min_degrees = convert_f_to_c(data[1])
-        max_degrees = convert_f_to_c(data[2])
-        min_temp = format_temperature(min_degrees)
-        max_temp = format_temperature(max_degrees)
-        print(f"""---- {date} ----
-  Minimum Temperature: {min_temp}
-  Maximum Temperature: {max_temp}
+        if data and len(data) == 3:
+            iso_date = data[0]
+            date = convert_date(iso_date)
+            min_temp_c = convert_f_to_c(data[1])
+            max_temp_c = convert_f_to_c(data[2])
+            min_temp = format_temperature(min_temp_c)
+            max_temp = format_temperature(max_temp_c)
 
-        """)
-
-        # DO I NEED TO APPEND ALL TO NEW DICTIONARY AND PRINT FROM THERE?
+            daily_summary += f"---- {date} ----\n  Minimum Temperature: {min_temp}\n  Maximum Temperature: {max_temp}\n\n"
+            
+    return daily_summary
