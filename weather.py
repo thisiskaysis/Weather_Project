@@ -152,14 +152,15 @@ def generate_summary(weather_data):
     mean_low = calculate_mean(min_list)
     mean_low_celcius = convert_f_to_c(mean_low)
     avg_low = format_temperature(mean_low_celcius)
+
     mean_high = calculate_mean(max_list)
     mean_high_celcius = convert_f_to_c(mean_high)
     avg_high = format_temperature(mean_high_celcius)
 
     min = find_min(min_list)
-    min_list.extend(min)
-    min_index = min_list[-1]
-    min_farenheit = min_list[-2]
+    min_list.extend(min) #adds tuple values (temp and index) to the end of the list
+    min_index = min_list[-1] #index value is now last in list
+    min_farenheit = min_list[-2] #temp value is now second last in list
     min_celcius = convert_f_to_c(min_farenheit)
     min_temp = format_temperature(min_celcius)
 
@@ -170,10 +171,10 @@ def generate_summary(weather_data):
     max_celcius = convert_f_to_c(max_farenheit)
     max_temp = format_temperature(max_celcius)
 
-    min_data = weather_data[min_index][0]
-    min_date = convert_date(min_data)
-    max_data = weather_data[max_index][0]
-    max_date = convert_date(max_data)
+    min_date_data = weather_data[min_index][0]
+    min_date = convert_date(min_date_data)
+    max_date_data = weather_data[max_index][0]
+    max_date = convert_date(max_date_data)
 
     return f"""{date} Day Overview
   The lowest temperature will be {min_temp}, and will occur on {min_date}.
