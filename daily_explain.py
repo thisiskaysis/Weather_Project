@@ -20,11 +20,11 @@ daily_summary = "" #empty string to add each iteration summary
 for data in weather_data:
     if data and len(data) == 3:
         iso_date = data[0] #take date from first row
-        date = convert_date(iso_date) #convert date from ISO date
-        min_temp_c = convert_f_to_c(data[1]) #convert min temp to celcius
-        max_temp_c = convert_f_to_c(data[2]) #convert max temp to celcius
-        min_temp = format_temperature(min_temp_c) #format degrees celcius
-        max_temp = format_temperature(max_temp_c) #format degrees celcius
+        date = weather.convert_date(iso_date) #convert date from ISO date
+        min_temp_c = weather.convert_f_to_c(data[1]) #convert min temp to celcius
+        max_temp_c = weather.convert_f_to_c(data[2]) #convert max temp to celcius
+        min_temp = weather.format_temperature(min_temp_c) #format degrees celcius
+        max_temp = weather.format_temperature(max_temp_c) #format degrees celcius
 
         daily_summary += f"---- {date} ----\n  Minimum Temperature: {min_temp}\n  Maximum Temperature: {max_temp}\n\n"
         #this is the string we are adding to our empty string each iteration.
