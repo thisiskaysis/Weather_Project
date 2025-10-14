@@ -49,6 +49,7 @@ min_isodate = weather_data[min_index][0] #targeting weather_data list, [min_inde
 min_date = weather.convert_date(min_isodate) #convert date from ISO date
 
 #DAY OF HIGHEST TEMP
+#Finding the DAY that the lowest temp occurs on, using the index value from find_max function
 max_isodate = weather_data[max_index][0] #targeting weather_data list, [max_index] grabs the correct DAY sublist, [0] targets the FIRST ROW which is isodate string
 max_date = weather.convert_date(max_isodate) #convert date from ISO date
 

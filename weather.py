@@ -140,41 +140,44 @@ def generate_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
+    
     min_list = []
     max_list = []
     date = len(weather_data)
 
+    #ADD LOW AND HIGH TEMP DATA TO NEW, SEPERATE LISTS
     for data in weather_data:
         if data and len(data) == 3:
-            min_list.append(data[1]) 
-            max_list.append(data[2]) 
+            min_list.append(data[1])
+            max_list.append(data[2])
 
-    mean_low = calculate_mean(min_list)
-    mean_low_celcius = convert_f_to_c(mean_low)
-    avg_low = format_temperature(mean_low_celcius)
+    #FIND MEAN (AVG) LOW TEMP
+    mean_low_f = calculate_mean(min_list)
+    mean_low_c = convert_f_to_c(mean_low_f)
+    avg_low = format_temperature(mean_low_c)
 
-    mean_high = calculate_mean(max_list)
-    mean_high_celcius = convert_f_to_c(mean_high)
-    avg_high = format_temperature(mean_high_celcius)
+    #FIND MEAN (AVG) HIGH TEMP
+    mean_high_f = calculate_mean(max_list)
+    mean_high_c = convert_f_to_c(mean_high_f)
+    avg_high = format_temperature(mean_high_c)
 
-    min = find_min(min_list)
-    min_list.extend(min) #adds tuple values (temp and index) to the end of the list
-    min_index = min_list[-1] #index value is now last in list
-    min_farenheit = min_list[-2] #temp value is now second last in list
-    min_celcius = convert_f_to_c(min_farenheit)
-    min_temp = format_temperature(min_celcius)
+    #FIND MIN TEMP, CONVERT & FORMAT
+    min_temp_f, min_index = find_min(min_list)
+    min_temp_c = convert_f_to_c(min_temp_f)
+    min_temp = format_temperature(min_temp_c)
 
-    max = find_max(max_list)
-    max_list.extend(max)
-    max_index = max_list[-1]
-    max_farenheit = max_list[-2]
-    max_celcius = convert_f_to_c(max_farenheit)
-    max_temp = format_temperature(max_celcius)
+    #FIND MAX TEMP, CONVERT & FORMAT
+    max_temp_f, max_index = find_max(max_list)
+    max_temp_c = convert_f_to_c(max_temp_f)
+    max_temp = format_temperature(max_temp_c)
 
-    min_date_data = weather_data[min_index][0]
-    min_date = convert_date(min_date_data)
-    max_date_data = weather_data[max_index][0]
-    max_date = convert_date(max_date_data)
+    #DAY OF LOWEST TEMP
+    min_isodate = weather_data[min_index][0]
+    min_date = convert_date(min_isodate)
+
+    #DAY OF HIGHEST TEMP
+    max_isodate = weather_data[max_index][0]
+    max_date = convert_date(max_isodate)
 
     return f"""{date} Day Overview
   The lowest temperature will be {min_temp}, and will occur on {min_date}.
