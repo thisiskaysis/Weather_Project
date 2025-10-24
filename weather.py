@@ -104,6 +104,7 @@ def find_min(weather_data):
             last_index = index
     
     float_value = float(min_value)
+    
     return float_value, last_index
 
 
